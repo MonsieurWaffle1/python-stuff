@@ -1,97 +1,98 @@
-#card_rand v1.0
 #Created by MonsieurWaffle
+"card_rand v1.0.1"
 
 #Imports modules
-import time
 import random
 
 def test():
+    "Tests the module is correctly functioning"
     print ('The module is correctly functioning.')
 
-def cardChecker(drawnCard, playedCards):
-    #Returns a variable based on weather or not the card has been drawn
-    if drawnCard in playedCards:
-        isViable = False
+def card_checker(drawn_card, played_cards):
+    "Returns a variable based on weather or not the card has been drawn"
+    if drawn_card in played_cards:
+        is_viable = False
     else:
-        playedCards.append(drawnCard)
-        isViable = True
-    return playedCards, isViable
+        played_cards.append(drawn_card)
+        is_viable = True
+    return played_cards, is_viable
 
-def drawCard(currentScore, playedCards, aceChoise):
+def draw_card(current_score, played_cards, ace_choise):
+    "Draws a playing card, provides a str representing the drawn card, as well as a current score. Will never draw the same card twice."
     draw = True
-    while draw == True:
+    while draw is True:
         #Draws the card and determines the suit
-        drawnCardNumber = random.randint(1, 13)
-        cardSuit = random.randint(1,4)
+        drawn_card_number = random.randint(1, 13)
+        card_suit = random.randint(1,4)
 
-        if cardSuit == 1:
-            cardSuit = 'of Spades'
-        elif cardSuit == 2:
-            cardSuit = 'of Clubs'
-        elif cardSuit == 3:
-            cardSuit = 'of Hearts'
-        elif cardSuit == 4:
-            cardSuit = 'of Diamonds'
+        if card_suit == 1:
+            card_suit = 'of Spades'
+        elif card_suit == 2:
+            card_suit = 'of Clubs'
+        elif card_suit == 3:
+            card_suit = 'of Hearts'
+        elif card_suit == 4:
+            card_suit = 'of Diamonds'
 
         #Concentrates the drawn card from an int to a str
-        if drawnCardNumber == 1:
-            displayCardNumber = 'Ace '
-        elif drawnCardNumber == 2:
-            displayCardNumber = '2 '
-        elif drawnCardNumber == 3:
-            displayCardNumber = '3 '
-        elif drawnCardNumber == 4:
-            displayCardNumber = '4 '
-        elif drawnCardNumber == 5:
-            displayCardNumber = '5 '
-        elif drawnCardNumber == 6:
-            displayCardNumber = '6 '
-        elif drawnCardNumber == 7:
-            displayCardNumber = '7 '
-        elif drawnCardNumber == 8:
-            displayCardNumber = '8 '
-        elif drawnCardNumber == 9:
-            displayCardNumber = '9 '
-        elif drawnCardNumber == 10:
-            displayCardNumber = '10 '
-        elif drawnCardNumber == 11:
-            displayCardNumber = 'Jack '
-        elif drawnCardNumber == 12:
-            displayCardNumber = 'Queen '
-        elif drawnCardNumber == 13:
-            displayCardNumber = 'King '
+        if drawn_card_number == 1:
+            display_card_number = 'Ace '
+        elif drawn_card_number == 2:
+            display_card_number = '2 '
+        elif drawn_card_number == 3:
+            display_card_number = '3 '
+        elif drawn_card_number == 4:
+            display_card_number = '4 '
+        elif drawn_card_number == 5:
+            display_card_number = '5 '
+        elif drawn_card_number == 6:
+            display_card_number = '6 '
+        elif drawn_card_number == 7:
+            display_card_number = '7 '
+        elif drawn_card_number == 8:
+            display_card_number = '8 '
+        elif drawn_card_number == 9:
+            display_card_number = '9 '
+        elif drawn_card_number == 10:
+            display_card_number = '10 '
+        elif drawn_card_number == 11:
+            display_card_number = 'Jack '
+        elif drawn_card_number == 12:
+            display_card_number = 'Queen '
+        elif drawn_card_number == 13:
+            display_card_number = 'King '
 
-        displayCard = (displayCardNumber + cardSuit)
+        display_card = display_card_number + card_suit
 
-        #Assigns the correct values to the Jack, Queen and King cards   
-        if drawnCardNumber == 11:
-            drawnCardNumber = 10
-        elif drawnCardNumber == 12:
-            drawnCardNumber = 10
-        elif drawnCardNumber == 13:
-            drawnCardNumber = 10
+        #Assigns the correct values to the Jack, Queen and King cards
+        if drawn_card_number == 11:
+            drawn_card_number = 10
+        elif drawn_card_number == 12:
+            drawn_card_number = 10
+        elif drawn_card_number == 13:
+            drawn_card_number = 10
 
         #Asks the user to choose a value for the ace
-        if drawnCardNumber == 1:
-            if aceChoise == True:
-                aceDesition = input('Would you like your ace to be 1 or 11? ')
-                int(aceDesition)
+        if drawn_card_number == 1:
+            if ace_choise is True:
+                ace_desition = input('Would you like your ace to be 1 or 11? ')
+                int(ace_desition)
             else:
-                aceDesition = '11'
+                ace_desition = '11'
 
-            if aceDesition == '1':
-                currentScore = currentScore + 1
-            elif aceDesition == '11':
-                 currentScore = currentScore + 11
+            if ace_desition == '1':
+                current_score = current_score + 1
+            elif ace_desition == '11':
+                current_score = current_score + 11
             else:
-                currentScore = currentScore + 200
+                current_score = current_score + 200
         else:
-            currentScore = currentScore + drawnCardNumber
+            current_score = current_score + drawn_card_number
 
         #Redraws the card if the card has already been drawn
-        drawnCard = displayCard
-        playedCard, isViable = cardChecker(drawnCard, playedCards)
-        if isViable == True:
+        drawn_card = display_card
+        played_cards, is_viable = card_checker(drawn_card, played_cards)
+        if is_viable is True:
             draw = False
-            
-    return currentScore, displayCard, playedCards
+
+    return current_score, display_card, played_cards
