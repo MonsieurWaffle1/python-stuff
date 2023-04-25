@@ -19,7 +19,8 @@ def play_game():
     current_score, display_card, played_cards = random_plus.draw_card(current_score, played_cards, False)
     current_score, display_card, played_cards = random_plus.draw_card(current_score, played_cards, False)
 
-    while True:
+    is_out = False
+    while is_out is False:
         #Tells the user what their score is
         if startup == 1:
             print ('Your starting score is:')
@@ -55,9 +56,11 @@ def play_game():
         #Checks for blackjack
         if current_score > 21:
             print ("I'm afraid you've gone over 21!")
+            is_out = True
         elif current_score == 21:
             print ('BLACKJACK!!!!')
             print ('Congratulations!')
+            is_out = True
     str(current_score)
     print ('Your final score was:')
     print (current_score)
