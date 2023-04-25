@@ -1,80 +1,75 @@
+"A simple blackjack game."
 #Imports modules
 import time
-import random
-import card_rand
+import random_plus
 
 #Sets starting variables
-startup = 1
-playing = 1
-aceChoise = True
+IN_PLAY = 1
 
-card_rand.test()
+random_plus.test()
 
-def playGame():
-    playedCards = []
+def play_game():
+    "Runs the game."
+    played_cards = []
     startup = 1
-    currentScore = 0
-    isOut = 0
+    current_score = 0
+    ace_choise = True
 
     #Draws the starting cards
-    currentScore, displayCard, playedCards = card_rand.drawCard(currentScore, playedCards, False) 
-    currentScore, displayCard, playedCards = card_rand.drawCard(currentScore, playedCards, False) 
+    current_score, display_card, played_cards = random_plus.draw_card(current_score, played_cards, False)
+    current_score, display_card, played_cards = random_plus.draw_card(current_score, played_cards, False)
 
-    while isOut == 0:
+    while True:
         #Tells the user what their score is
         if startup == 1:
             print ('Your starting score is:')
-            print(currentScore)
+            print(current_score)
             time.sleep(0.5)
             print (' ')
             print ('Your starting cards are:')
-            print (playedCards)
+            print (played_cards)
 
             #Checks for a blackjack
-            if currentScore == 21:
-                isOut = 1
+            if current_score == 21:
                 print ('BLACKJACK!!!!')
                 print ('Congratulations!')
-                isOut == 0
+                break
             startup += 1
         else:
             print ('The drawn card is:')
-            print (displayCard)
+            print (display_card)
             print (' ')
             print ('Your current score is: ')
-            print (currentScore)
+            print (current_score)
 
         time.sleep(0.5)
 
         #Asks the user to stick or twist
-        stickOrTwist = input('Would you like to stick or twist? ')
+        stick_or_twist = input('Would you like to stick or twist? ')
         time.sleep(0.5)
-        if stickOrTwist == 'twist':
-            currentScore, displayCard, playedCards = card_rand.drawCard(currentScore, playedCards, aceChoise)
-        elif stickOrTwist == 'stick':
+        if stick_or_twist == 'twist':
+            current_score, display_card, played_cards = random_plus.draw_card(current_score, played_cards, ace_choise)
+        elif stick_or_twist == 'stick':
             break
 
         #Checks for blackjack
-        if currentScore > 21:
-            isOut = 1
+        if current_score > 21:
             print ("I'm afraid you've gone over 21!")
-        elif currentScore == 21:
-            isOut = 1
+        elif current_score == 21:
             print ('BLACKJACK!!!!')
             print ('Congratulations!')
-    str(currentScore)
+    str(current_score)
     print ('Your final score was:')
-    print (currentScore)
+    print (current_score)
 
-while playing == 1:
+while True:
     #Repeats the game until the user dosen't want to play
-    playGame()
+    play_game()
     time.sleep(0.5)
     playAgain = input('Would you like to play again? y/n ')
     if playAgain == 'n':
-        playing = playing + 1
+        break
 time.sleep(0.5)
 
 print ('Thanks for playing!')
 time.sleep(3)
-        
